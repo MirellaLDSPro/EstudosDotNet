@@ -1,0 +1,42 @@
+@page "/converter"
+@inject ILogger<Converter> Logger
+    
+<EditForm Model="Model" OnSubmit="Submit" FormName="converter1">
+    <div class="mb-3">
+        <label class="form-label">Caminho dos arquivos DOC/DOCX</label>
+        <InputText id="docPath" class="form-control" @bind-Value="Model!.DocPath" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Pasta de Destino dos PDFs</label>
+        <InputText id="pdfPath" class="form-control" @bind-Value="Model!.PdfPath" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Caminho do LibreOffice</label>
+        <InputText id="libreOfficePath" class="form-control" @bind-Value="Model!.LibreOfficePath" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Converter</button>
+</EditForm>
+
+@code 
+{
+    [SupplyParameterFromForm]
+    public ConverterFormModel? Model { get; set; }
+
+    protected override void OnInitialized() => Model ??= new();
+
+    private void Submit()
+    {
+        Console.WriteLine("Documment "+ Model?.DocPath);
+        Console.WriteLine("PDF "+ Model?.PdfPath);
+        Console.WriteLine("LibreOffice "+ Model?.LibreOfficePath);
+        
+        if(Model.DocPath is null) return;
+        if(Model.PdfPath is null) return;
+        if(Model.LibreOfficePath is null) return;
+
+        LibreOffice.Run(doc: Model.DocPath, pdf: Model.PdfPath, libre: Model.LibreOfficePath);
+    }
+}

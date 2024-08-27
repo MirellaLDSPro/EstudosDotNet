@@ -1,0 +1,50 @@
+@page "/email"
+@using System.ComponentModel.DataAnnotations
+@inject EmailService EmailService
+
+<EditForm Model="emailModel" OnValidSubmit="SendEmail" FormName="email1">
+
+    <div>
+        <label for="to">Destinatário:</label>
+        <InputText id="to" @bind-Value="emailModel!.To" class="form-control" />
+    </div>
+    <div>
+        <label for="subject">Assunto:</label>
+        <InputText id="subject" @bind-Value="emailModel!.Subject" class="form-control" />
+    </div>
+    <div>
+        <label for="body">Mensagem:</label>
+        <InputTextArea id="body" @bind-Value="emailModel!.Body" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Enviar Email</button>
+</EditForm>
+
+@code {
+    [SupplyParameterFromForm]
+    private EmailModel? emailModel { get; set; }
+
+    protected override void OnInitialized() => emailModel ??= new();
+
+    private async Task SendEmail()
+    {
+        Console.WriteLine("Destinatário "+ emailModel?.To);
+        Console.WriteLine("Assunto "+ emailModel?.Subject);
+        Console.WriteLine("Corpo "+ emailModel?.Body);
+
+        if (emailModel is null) return;
+
+        await EmailService.SendEmailAsync(emailModel.To, emailModel.Subject, emailModel.Body);
+    }
+
+    public class EmailModel
+    {
+        [Required]
+        public string To { get; set; }
+
+        [Required]
+        public string Subject { get; set; }
+
+        [Required]
+        public string Body { get; set; }
+    }
+}

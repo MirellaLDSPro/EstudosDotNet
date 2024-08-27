@@ -1,0 +1,41 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Projects\\C#\\HelpDoc\\HelpDOc\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\HelpDOc.bundle.scp.css",
+      "PackagePath": "staticwebassets\\HelpDOc.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Projects\\C#\\HelpDoc\\HelpDOc\\wwwroot\\app.css",
+      "PackagePath": "staticwebassets\\app.css"
+    },
+    {
+      "Id": "C:\\Projects\\C#\\HelpDoc\\HelpDOc\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Projects\\C#\\HelpDoc\\HelpDOc\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Projects\\C#\\HelpDoc\\HelpDOc\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.HelpDOc.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.HelpDOc.props",
+      "PackagePath": "build\\HelpDOc.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.HelpDOc.props",
+      "PackagePath": "buildMultiTargeting\\HelpDOc.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.HelpDOc.props",
+      "PackagePath": "buildTransitive\\HelpDOc.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
