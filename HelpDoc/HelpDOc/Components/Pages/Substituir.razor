@@ -6,66 +6,67 @@
 
 <h3>Substituir Texto em Documento DOC</h3>
 
-<div class="mb-3">
-    <label for="docFile" class="form-label">Selecione o arquivo DOC</label>
-    <input type="text" id="docPath" @bind="selectedFile" class="form-control" />
-</div>
+<EditForm Model="SubstituirModel" OnSubmit="OnSubmit" FormName="converter2">
+    <div class="mb-3">
+        <label for="docFile" class="form-label">Selecione o arquivo DOC</label>
+        <InputText id="docPath" @bind-Value="SubstituirModel!.SelectedFile" class="form-control" />
+    </div>
 
-<div class="mb-3">
-    <label for="oldText" class="form-label">Texto a ser substituído</label>
-    <input type="text" id="oldText" @bind="OldText" class="form-control" />
-</div>
+    <div class="mb-3">
+        <label for="oldText" class="form-label">Texto a ser substituído</label>
+        <InputText id="oldText" @bind-Value="SubstituirModel!.OldText" class="form-control" />
+    </div>
 
-<div class="mb-3">
-    <label for="newText" class="form-label">Novo texto</label>
-    <input type="text" id="newText" @bind="NewText" class="form-control" />
-</div>
+    <div class="mb-3">
+        <label for="newText" class="form-label">Novo texto</label>
+        <InputText id="newText" @bind-Value="SubstituirModel!.NewText" class="form-control" />
+    </div>
 
-<button @onclick="OnSubmitAsync" class="btn btn-primary">Substituir Texto</button>
+    <button type="submit" class="btn btn-primary">Substituir Texto</button>
+</EditForm>
 
-@if (!string.IsNullOrEmpty(SuccessMessage))
+@if (!string.IsNullOrEmpty(SubstituirModel!.SuccessMessage))
 {
-    <div class="alert alert-success mt-3">@SuccessMessage</div>
+    <div class="alert alert-success mt-3">@SubstituirModel!.SuccessMessage</div>
 }
 
-@if (!string.IsNullOrEmpty(ErrorMessage))
+@if (!string.IsNullOrEmpty(SubstituirModel!.ErrorMessage))
 {
-    <div class="alert alert-danger mt-3">@ErrorMessage</div>
+    <div class="alert alert-danger mt-3">@SubstituirModel!.ErrorMessage</div>
 }
 
 @code {
-    private string selectedFile;
-    private string OldText { get; set; }
-    private string NewText { get; set; }
-    private string SuccessMessage { get; set; }
-    private string ErrorMessage { get; set; }
+    [SupplyParameterFromForm]
+    public SubstituirModel? SubstituirModel { get; set; }
 
-    private async Task OnSubmitAsync()
+    protected override void OnInitialized() => SubstituirModel ??= new();
+
+    private void OnSubmit()
     {
-        if (selectedFile == null)
+        if(SubstituirModel == null) return;
+
+        if (string.IsNullOrEmpty(SubstituirModel!.SelectedFile))
         {
-            ErrorMessage = "Por favor, selecione um arquivo DOC.";
+            SubstituirModel!.ErrorMessage = "Por favor, selecione um arquivo DOC.";
             return;
         }
 
         try
         {
-            var tempFilePath = Path.Combine(Path.GetTempPath(), selectedFile);
+            // Se `selectedFile` já for o caminho completo do arquivo:
+            var tempFilePath = SubstituirModel!.SelectedFile;
 
-            using (var stream = selectedFile.OpenReadStream())
-            using (var fileStream = new FileStream(tempFilePath, FileMode.Create))
-            {
-                await stream.CopyToAsync(fileStream);
-            }
+            // Se `selectedFile` for apenas o nome do arquivo, você pode precisar ajustar o caminho:
+            // var tempFilePath = Path.Combine("caminho_completo", selectedFile);
 
-            ReplaceTextInDocFile(tempFilePath, OldText, NewText);
-            SuccessMessage = "Texto substituído com sucesso! Arquivo salvo em: " + tempFilePath;
-            ErrorMessage = null;
+            ReplaceTextInDocFile(tempFilePath, SubstituirModel!.OldText, SubstituirModel!.NewText);
+            SubstituirModel!.SuccessMessage = "Texto substituído com sucesso! Arquivo salvo em: " + tempFilePath;
+            SubstituirModel!.ErrorMessage = null;
         }
         catch (Exception ex)
         {
-            ErrorMessage = "Erro ao processar o arquivo: " + ex.Message;
-            SuccessMessage = null;
+            SubstituirModel!.ErrorMessage = "Erro ao processar o arquivo: " + ex.Message;
+            SubstituirModel!.SuccessMessage = null;
         }
     }
 
