@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Projects\\C#\\HelpDoc\\HelpDOc\\HelpDOc.csproj": {}
+    "c:\\Projects\\C#\\EstudosDotNet\\HelpDoc\\HelpDOc\\HelpDOc.csproj": {}
   },
   "projects": {
-    "C:\\Projects\\C#\\HelpDoc\\HelpDOc\\HelpDOc.csproj": {
+    "c:\\Projects\\C#\\EstudosDotNet\\HelpDoc\\HelpDOc\\HelpDOc.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projects\\C#\\HelpDoc\\HelpDOc\\HelpDOc.csproj",
+        "projectUniqueName": "c:\\Projects\\C#\\EstudosDotNet\\HelpDoc\\HelpDOc\\HelpDOc.csproj",
         "projectName": "HelpDOc",
-        "projectPath": "C:\\Projects\\C#\\HelpDoc\\HelpDOc\\HelpDOc.csproj",
+        "projectPath": "c:\\Projects\\C#\\EstudosDotNet\\HelpDoc\\HelpDOc\\HelpDOc.csproj",
         "packagesPath": "C:\\Users\\mirel\\.nuget\\packages\\",
-        "outputPath": "C:\\Projects\\C#\\HelpDoc\\HelpDOc\\obj\\",
+        "outputPath": "c:\\Projects\\C#\\EstudosDotNet\\HelpDoc\\HelpDOc\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\mirel\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -43,6 +43,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "DocumentFormat.OpenXml": {
+              "target": "Package",
+              "version": "[3.1.0, )"
+            },
             "MailKit": {
               "target": "Package",
               "version": "[4.7.1.1, )"

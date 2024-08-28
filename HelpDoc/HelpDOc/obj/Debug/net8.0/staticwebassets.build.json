@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "MLPJ7DwNVMuDksd1LXI46yUd1p4eQTyrYLNVn4s4Duo=",
+  "Hash": "BeagsopfW7veByKImQ11WNwwbjd7AnmrFYTiEOQRZtA=",
   "Source": "HelpDOc",
   "BasePath": "_content/HelpDOc",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "HelpDOc\\wwwroot",
       "Source": "HelpDOc",
-      "ContentRoot": "C:\\Projects\\C#\\HelpDoc\\HelpDOc\\wwwroot\\",
+      "ContentRoot": "c:\\Projects\\C#\\EstudosDotNet\\HelpDoc\\HelpDOc\\wwwroot\\",
       "BasePath": "_content/HelpDOc",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Projects\\C#\\HelpDoc\\HelpDOc\\obj\\Debug\\net8.0\\scopedcss\\bundle\\HelpDOc.styles.css",
+      "Identity": "c:\\Projects\\C#\\EstudosDotNet\\HelpDoc\\HelpDOc\\obj\\Debug\\net8.0\\scopedcss\\bundle\\HelpDOc.styles.css",
       "SourceId": "HelpDOc",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Projects\\C#\\HelpDoc\\HelpDOc\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
+      "ContentRoot": "c:\\Projects\\C#\\EstudosDotNet\\HelpDoc\\HelpDOc\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
       "BasePath": "_content/HelpDOc",
       "RelativePath": "HelpDOc.styles.css",
       "AssetKind": "All",
@@ -33,13 +33,13 @@
       "AssetTraitValue": "ApplicationBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Projects\\C#\\HelpDoc\\HelpDOc\\obj\\Debug\\net8.0\\scopedcss\\bundle\\HelpDOc.styles.css"
+      "OriginalItemSpec": "c:\\Projects\\C#\\EstudosDotNet\\HelpDoc\\HelpDOc\\obj\\Debug\\net8.0\\scopedcss\\bundle\\HelpDOc.styles.css"
     },
     {
-      "Identity": "C:\\Projects\\C#\\HelpDoc\\HelpDOc\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\HelpDOc.bundle.scp.css",
+      "Identity": "c:\\Projects\\C#\\EstudosDotNet\\HelpDoc\\HelpDOc\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\HelpDOc.bundle.scp.css",
       "SourceId": "HelpDOc",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Projects\\C#\\HelpDoc\\HelpDOc\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
+      "ContentRoot": "c:\\Projects\\C#\\EstudosDotNet\\HelpDoc\\HelpDOc\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
       "BasePath": "_content/HelpDOc",
       "RelativePath": "HelpDOc.bundle.scp.css",
       "AssetKind": "All",
@@ -52,13 +52,13 @@
       "AssetTraitValue": "ProjectBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Projects\\C#\\HelpDoc\\HelpDOc\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\HelpDOc.bundle.scp.css"
+      "OriginalItemSpec": "c:\\Projects\\C#\\EstudosDotNet\\HelpDoc\\HelpDOc\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\HelpDOc.bundle.scp.css"
     },
     {
-      "Identity": "C:\\Projects\\C#\\HelpDoc\\HelpDOc\\wwwroot\\app.css",
+      "Identity": "c:\\Projects\\C#\\EstudosDotNet\\HelpDoc\\HelpDOc\\wwwroot\\app.css",
       "SourceId": "HelpDOc",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Projects\\C#\\HelpDoc\\HelpDOc\\wwwroot\\",
+      "ContentRoot": "c:\\Projects\\C#\\EstudosDotNet\\HelpDoc\\HelpDOc\\wwwroot\\",
       "BasePath": "_content/HelpDOc",
       "RelativePath": "app.css",
       "AssetKind": "All",
@@ -74,10 +74,10 @@
       "OriginalItemSpec": "wwwroot\\app.css"
     },
     {
-      "Identity": "C:\\Projects\\C#\\HelpDoc\\HelpDOc\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "Identity": "c:\\Projects\\C#\\EstudosDotNet\\HelpDoc\\HelpDOc\\wwwroot\\bootstrap\\bootstrap.min.css",
       "SourceId": "HelpDOc",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Projects\\C#\\HelpDoc\\HelpDOc\\wwwroot\\",
+      "ContentRoot": "c:\\Projects\\C#\\EstudosDotNet\\HelpDoc\\HelpDOc\\wwwroot\\",
       "BasePath": "_content/HelpDOc",
       "RelativePath": "bootstrap/bootstrap.min.css",
       "AssetKind": "All",
@@ -93,10 +93,10 @@
       "OriginalItemSpec": "wwwroot\\bootstrap\\bootstrap.min.css"
     },
     {
-      "Identity": "C:\\Projects\\C#\\HelpDoc\\HelpDOc\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "Identity": "c:\\Projects\\C#\\EstudosDotNet\\HelpDoc\\HelpDOc\\wwwroot\\bootstrap\\bootstrap.min.css.map",
       "SourceId": "HelpDOc",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Projects\\C#\\HelpDoc\\HelpDOc\\wwwroot\\",
+      "ContentRoot": "c:\\Projects\\C#\\EstudosDotNet\\HelpDoc\\HelpDOc\\wwwroot\\",
       "BasePath": "_content/HelpDOc",
       "RelativePath": "bootstrap/bootstrap.min.css.map",
       "AssetKind": "All",
@@ -112,10 +112,10 @@
       "OriginalItemSpec": "wwwroot\\bootstrap\\bootstrap.min.css.map"
     },
     {
-      "Identity": "C:\\Projects\\C#\\HelpDoc\\HelpDOc\\wwwroot\\favicon.png",
+      "Identity": "c:\\Projects\\C#\\EstudosDotNet\\HelpDoc\\HelpDOc\\wwwroot\\favicon.png",
       "SourceId": "HelpDOc",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Projects\\C#\\HelpDoc\\HelpDOc\\wwwroot\\",
+      "ContentRoot": "c:\\Projects\\C#\\EstudosDotNet\\HelpDoc\\HelpDOc\\wwwroot\\",
       "BasePath": "_content/HelpDOc",
       "RelativePath": "favicon.png",
       "AssetKind": "All",
