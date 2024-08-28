@@ -1,20 +1,89 @@
 @page "/substituir"
+@using System.IO
+@using DocumentFormat.OpenXml.Packaging
+@using DocumentFormat.OpenXml.Wordprocessing
+@inject NavigationManager Navigation
 
 <h3>Substituir Texto em Documento DOC</h3>
 
 <div class="mb-3">
     <label for="docFile" class="form-label">Selecione o arquivo DOC</label>
-    <input type="file" class="form-control" />
+    <input type="text" id="docPath" @bind="selectedFile" class="form-control" />
 </div>
 
 <div class="mb-3">
     <label for="oldText" class="form-label">Texto a ser substituído</label>
-    <input type="text" id="oldText" />
+    <input type="text" id="oldText" @bind="OldText" class="form-control" />
 </div>
 
 <div class="mb-3">
     <label for="newText" class="form-label">Novo texto</label>
-    <input type="text" id="newText" />
+    <input type="text" id="newText" @bind="NewText" class="form-control" />
 </div>
 
-<button class="btn btn-primary">Substituir Texto</button>
+<button @onclick="OnSubmitAsync" class="btn btn-primary">Substituir Texto</button>
+
+@if (!string.IsNullOrEmpty(SuccessMessage))
+{
+    <div class="alert alert-success mt-3">@SuccessMessage</div>
+}
+
+@if (!string.IsNullOrEmpty(ErrorMessage))
+{
+    <div class="alert alert-danger mt-3">@ErrorMessage</div>
+}
+
+@code {
+    private string selectedFile;
+    private string OldText { get; set; }
+    private string NewText { get; set; }
+    private string SuccessMessage { get; set; }
+    private string ErrorMessage { get; set; }
+
+    private async Task OnSubmitAsync()
+    {
+        if (selectedFile == null)
+        {
+            ErrorMessage = "Por favor, selecione um arquivo DOC.";
+            return;
+        }
+
+        try
+        {
+            var tempFilePath = Path.Combine(Path.GetTempPath(), selectedFile);
+
+            using (var stream = selectedFile.OpenReadStream())
+            using (var fileStream = new FileStream(tempFilePath, FileMode.Create))
+            {
+                await stream.CopyToAsync(fileStream);
+            }
+
+            ReplaceTextInDocFile(tempFilePath, OldText, NewText);
+            SuccessMessage = "Texto substituído com sucesso! Arquivo salvo em: " + tempFilePath;
+            ErrorMessage = null;
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = "Erro ao processar o arquivo: " + ex.Message;
+            SuccessMessage = null;
+        }
+    }
+
+    private void ReplaceTextInDocFile(string filePath, string oldText, string newText)
+    {
+        using (WordprocessingDocument wordDoc = WordprocessingDocument.Open(filePath, true))
+        {
+            var body = wordDoc.MainDocumentPart.Document.Body;
+
+            foreach (var text in body.Descendants<Text>())
+            {
+                if (text.Text.Contains(oldText))
+                {
+                    text.Text = text.Text.Replace(oldText, newText);
+                }
+            }
+
+            wordDoc.MainDocumentPart.Document.Save();
+        }
+    }
+}
