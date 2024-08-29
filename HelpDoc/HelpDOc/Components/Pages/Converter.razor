@@ -29,14 +29,33 @@
 
     private void Submit()
     {
-        Console.WriteLine("Documment "+ Model?.DocPath);
-        Console.WriteLine("PDF "+ Model?.PdfPath);
-        Console.WriteLine("LibreOffice "+ Model?.LibreOfficePath);
-        
-        if(Model.DocPath is null) return;
-        if(Model.PdfPath is null) return;
-        if(Model.LibreOfficePath is null) return;
+        if (Model?.DocPath is null || Model.PdfPath is null || Model.LibreOfficePath is null)
+        {
+            return;
+        }
 
-        LibreOffice.Run(doc: Model.DocPath, pdf: Model.PdfPath, libre: Model.LibreOfficePath);
+        // Obtém todos os arquivos DOC/DOCX no diretório pai e subdiretórios
+        string[] docFiles = Directory.GetFiles(Model.DocPath, "*.doc", SearchOption.AllDirectories)
+                              .Concat(Directory.GetFiles(Model.DocPath, "*.docx", SearchOption.AllDirectories))
+                              .ToArray();
+
+        foreach (string docFile in docFiles)
+        {
+            // Obtém o caminho relativo do arquivo em relação ao diretório pai
+            string relativePath = Path.GetRelativePath(Model.DocPath, docFile);
+
+            // Define o caminho de destino para o arquivo PDF, mantendo a estrutura de diretórios
+            string pdfDestinationDir = Path.Combine(Model.PdfPath, Path.GetDirectoryName(relativePath)!);
+            Directory.CreateDirectory(pdfDestinationDir);
+
+            // Define o nome do arquivo PDF correspondente no diretório de destino
+            string pdfFileName = Path.GetFileNameWithoutExtension(docFile) + ".pdf";
+            string pdfFile = Path.Combine(pdfDestinationDir, pdfFileName);
+
+            // Executa a conversão
+            LibreOffice.Run(doc: docFile, pdf: pdfDestinationDir, libre: Model.LibreOfficePath);
+        }
+
+        Console.WriteLine("Conversão concluída.");
     }
 }
