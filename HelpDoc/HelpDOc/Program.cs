@@ -8,8 +8,11 @@ builder.Services.AddBlazorBootstrap();
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+string email = Environment.GetEnvironmentVariable("email_key");
+string senha = Environment.GetEnvironmentVariable("pws_email_key");
+
 // Injetando o EmailService
-builder.Services.AddSingleton(new EmailService("smtp.gmail.com", 465, "mlds.assinaturas@gmail.com", "ibvp tbgg bmwm qwfv"));
+builder.Services.AddSingleton(new EmailService("smtp.gmail.com", 465, email, senha));
 // O Gmail precisa que seja gerado uma senha especifica para o app. Procure por "Senha de App"
 
 var app = builder.Build();
