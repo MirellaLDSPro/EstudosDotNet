@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Projects\\C#\\EstudosDotNet\\HelpDoc\\HelpDOc\\HelpDOc.csproj": {}
+    "C:\\Projects\\C#\\EstudosDotNet\\HelpDoc\\HelpDOc\\HelpDOc.csproj": {}
   },
   "projects": {
-    "c:\\Projects\\C#\\EstudosDotNet\\HelpDoc\\HelpDOc\\HelpDOc.csproj": {
+    "C:\\Projects\\C#\\EstudosDotNet\\HelpDoc\\HelpDOc\\HelpDOc.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Projects\\C#\\EstudosDotNet\\HelpDoc\\HelpDOc\\HelpDOc.csproj",
+        "projectUniqueName": "C:\\Projects\\C#\\EstudosDotNet\\HelpDoc\\HelpDOc\\HelpDOc.csproj",
         "projectName": "HelpDOc",
-        "projectPath": "c:\\Projects\\C#\\EstudosDotNet\\HelpDoc\\HelpDOc\\HelpDOc.csproj",
+        "projectPath": "C:\\Projects\\C#\\EstudosDotNet\\HelpDoc\\HelpDOc\\HelpDOc.csproj",
         "packagesPath": "C:\\Users\\mirel\\.nuget\\packages\\",
-        "outputPath": "c:\\Projects\\C#\\EstudosDotNet\\HelpDoc\\HelpDOc\\obj\\",
+        "outputPath": "C:\\Projects\\C#\\EstudosDotNet\\HelpDoc\\HelpDOc\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\mirel\\AppData\\Roaming\\NuGet\\NuGet.Config"

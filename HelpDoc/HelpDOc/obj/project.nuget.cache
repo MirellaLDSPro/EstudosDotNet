@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "PYLgUNaOh2A=",
+  "dgSpecHash": "XVtjfIlJ50I=",
   "success": true,
-  "projectFilePath": "c:\\Projects\\C#\\EstudosDotNet\\HelpDoc\\HelpDOc\\HelpDOc.csproj",
+  "projectFilePath": "C:\\Projects\\C#\\EstudosDotNet\\HelpDoc\\HelpDOc\\HelpDOc.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mirel\\.nuget\\packages\\bouncycastle.cryptography\\2.4.0\\bouncycastle.cryptography.2.4.0.nupkg.sha512",
     "C:\\Users\\mirel\\.nuget\\packages\\documentformat.openxml\\3.1.0\\documentformat.openxml.3.1.0.nupkg.sha512",
