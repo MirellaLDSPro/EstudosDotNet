@@ -399,19 +399,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\mirel\\.nuget\\packages\\": {}
+    "/Users/mplayer/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Projects\\C#\\EstudosDotNet\\HelpDoc\\HelpDOc\\HelpDOc.csproj",
+      "projectUniqueName": "/Users/mplayer/Projects/Estudos/C#/EstudosDotNet/HelpDoc/HelpDOc/HelpDOc.csproj",
       "projectName": "HelpDOc",
-      "projectPath": "C:\\Projects\\C#\\EstudosDotNet\\HelpDoc\\HelpDOc\\HelpDOc.csproj",
-      "packagesPath": "C:\\Users\\mirel\\.nuget\\packages\\",
-      "outputPath": "C:\\Projects\\C#\\EstudosDotNet\\HelpDoc\\HelpDOc\\obj\\",
+      "projectPath": "/Users/mplayer/Projects/Estudos/C#/EstudosDotNet/HelpDoc/HelpDOc/HelpDOc.csproj",
+      "packagesPath": "/Users/mplayer/.nuget/packages/",
+      "outputPath": "/Users/mplayer/Projects/Estudos/C#/EstudosDotNet/HelpDoc/HelpDOc/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\mirel\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/Users/mplayer/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -468,7 +468,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.304/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.401/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
