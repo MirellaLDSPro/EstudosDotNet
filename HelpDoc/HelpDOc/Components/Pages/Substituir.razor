@@ -2,75 +2,84 @@
 @using System.IO
 @using DocumentFormat.OpenXml.Packaging
 @using DocumentFormat.OpenXml.Wordprocessing
-@inject NavigationManager Navigation
 
 <h3>Substituir Texto em Documento DOC</h3>
 
-<EditForm Model="SubstituirModel" OnSubmit="OnSubmit" FormName="converter2">
-    <div class="mb-3">
-        <label for="docFile" class="form-label">Selecione o arquivo DOC</label>
-        <InputText id="docPath" @bind-Value="SubstituirModel!.SelectedFile" class="form-control" />
-    </div>
+<div>
+    <label for="docPath">Caminho do Doc modelo:</label>
+    <input type="text" id="docPath" @bind="DocModelPath" class="form-control" />
+</div>
 
-    <div class="mb-3">
-        <label for="oldText" class="form-label">Texto a ser substituído</label>
-        <InputText id="oldText" @bind-Value="SubstituirModel!.OldText" class="form-control" />
-    </div>
+<hr />
 
-    <div class="mb-3">
-        <label for="newText" class="form-label">Novo texto</label>
-        <InputText id="newText" @bind-Value="SubstituirModel!.NewText" class="form-control" />
-    </div>
-
-    <button type="submit" class="btn btn-primary">Substituir Texto</button>
-</EditForm>
-
-@if (!string.IsNullOrEmpty(SubstituirModel!.SuccessMessage))
+@foreach (var item in TextPairs)
 {
-    <div class="alert alert-success mt-3">@SubstituirModel!.SuccessMessage</div>
+    <div class="form-group">
+        <input type="text" placeholder="Texto antigo" @bind="item.OldText" class="form-control" style="display:inline-block; width:45%;" />
+        <input type="text" placeholder="Texto novo" @bind="item.NewText" class="form-control" style="display:inline-block; width:45%;" />
+        <button type="button" @onclick="() => RemoveTextPair(item)" class="btn btn-danger">Remover</button>
+    </div>
 }
 
-@if (!string.IsNullOrEmpty(SubstituirModel!.ErrorMessage))
+<button type="button" @onclick="AddTextPair" class="btn btn-primary">Adicionar mais um par de texto</button>
+<br /><br />
+
+<button type="button" @onclick="OnSubmitAsync" class="btn btn-success">Executar Operação</button>
+
+@if (!string.IsNullOrEmpty(SuccessMessage))
 {
-    <div class="alert alert-danger mt-3">@SubstituirModel!.ErrorMessage</div>
+    <div class="alert alert-success">@SuccessMessage</div>
+}
+
+@if (!string.IsNullOrEmpty(ErrorMessage))
+{
+    <div class="alert alert-danger">@ErrorMessage</div>
 }
 
 @code {
-    [SupplyParameterFromForm]
-    public SubstituirModel? SubstituirModel { get; set; }
+    private string DocModelPath { get; set; }
+    private List<TextPair> TextPairs { get; set; } = new List<TextPair>();
+    private string SuccessMessage { get; set; }
+    private string ErrorMessage { get; set; }
 
-    protected override void OnInitialized() => SubstituirModel ??= new();
-
-    private void OnSubmit()
+    private void AddTextPair()
     {
-        if(SubstituirModel == null) return;
+        TextPairs.Add(new TextPair());
+    }
 
-        if (string.IsNullOrEmpty(SubstituirModel!.SelectedFile))
+    private void RemoveTextPair(TextPair item)
+    {
+        TextPairs.Remove(item);
+    }
+
+    private async Task OnSubmitAsync()
+    {
+        if (string.IsNullOrEmpty(DocModelPath) || TextPairs.Count == 0)
         {
-            SubstituirModel!.ErrorMessage = "Por favor, selecione um arquivo DOC.";
+            ErrorMessage = "Por favor, forneça o caminho do documento e pelo menos um par de texto.";
             return;
         }
 
         try
         {
-            // Se `selectedFile` já for o caminho completo do arquivo:
-            var tempFilePath = SubstituirModel!.SelectedFile;
+            // Cria um novo arquivo baseado no modelo
+            var newFilePath = Path.Combine(Path.GetDirectoryName(DocModelPath), $"Novo_{Path.GetFileName(DocModelPath)}");
+            File.Copy(DocModelPath, newFilePath, true);
 
-            // Se `selectedFile` for apenas o nome do arquivo, você pode precisar ajustar o caminho:
-            // var tempFilePath = Path.Combine("caminho_completo", selectedFile);
+            // Substitui o texto no novo arquivo
+            ReplaceTextInDocFile(newFilePath, TextPairs);
 
-            ReplaceTextInDocFile(tempFilePath, SubstituirModel!.OldText, SubstituirModel!.NewText);
-            SubstituirModel!.SuccessMessage = "Texto substituído com sucesso! Arquivo salvo em: " + tempFilePath;
-            SubstituirModel!.ErrorMessage = null;
+            SuccessMessage = "Texto substituído com sucesso! Novo arquivo criado em: " + newFilePath;
+            ErrorMessage = null;
         }
         catch (Exception ex)
         {
-            SubstituirModel!.ErrorMessage = "Erro ao processar o arquivo: " + ex.Message;
-            SubstituirModel!.SuccessMessage = null;
+            ErrorMessage = "Erro ao processar o arquivo: " + ex.Message;
+            SuccessMessage = null;
         }
     }
 
-    private void ReplaceTextInDocFile(string filePath, string oldText, string newText)
+    private void ReplaceTextInDocFile(string filePath, List<TextPair> textPairs)
     {
         using (WordprocessingDocument wordDoc = WordprocessingDocument.Open(filePath, true))
         {
@@ -78,13 +87,22 @@
 
             foreach (var text in body.Descendants<Text>())
             {
-                if (text.Text.Contains(oldText))
+                foreach (var pair in textPairs)
                 {
-                    text.Text = text.Text.Replace(oldText, newText);
+                    if (text.Text.Contains(pair.OldText))
+                    {
+                        text.Text = text.Text.Replace(pair.OldText, pair.NewText);
+                    }
                 }
             }
 
             wordDoc.MainDocumentPart.Document.Save();
         }
+    }
+
+    private class TextPair
+    {
+        public string OldText { get; set; }
+        public string NewText { get; set; }
     }
 }
