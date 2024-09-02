@@ -62,7 +62,7 @@
 
         try
         {
-            var resultFilePath = Path.GetDirectoryName(DocModelPath)+"\\resultado";
+            var resultFilePath = Path.Combine(Path.GetDirectoryName(DocModelPath), "resultado");
             // Cria um novo arquivo baseado no modelo
             var newFilePath = Path.Combine(resultFilePath, $"Novo_{Path.GetFileName(DocModelPath)}");
             File.Copy(DocModelPath, newFilePath, true);
