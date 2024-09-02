@@ -1,0 +1,101 @@
+@page "/diff"
+@using System.Text
+@using DocumentFormat.OpenXml.Packaging
+
+<h3>Doc Diff</h3>
+
+<InputFile OnChange="HandleFileSelected" multiple="true" />
+<button @onclick="CompareFiles">Compare</button>
+
+@if (!string.IsNullOrEmpty(diffResultLeft) && !string.IsNullOrEmpty(diffResultRight))
+{
+    <div class="diff-container">
+        <div class="diff-column">
+            <h4>File 1</h4>
+            <pre>@((MarkupString)diffResultLeft)</pre>
+        </div>
+        <div class="diff-column">
+            <h4>File 2</h4>
+            <pre>@((MarkupString)diffResultRight)</pre>
+        </div>
+    </div>
+}
+
+@code {
+    private IBrowserFile file1;
+    private IBrowserFile file2;
+    private string diffResultLeft;
+    private string diffResultRight;
+
+    private void HandleFileSelected(InputFileChangeEventArgs e)
+    {
+        var files = e.GetMultipleFiles();
+        if (files.Count >= 2)
+        {
+            file1 = files[0];
+            file2 = files[1];
+        }
+    }
+
+    private async Task CompareFiles()
+    {
+        if (file1 != null && file2 != null)
+        {
+            var text1 = await ExtractTextFromDoc(file1);
+            var text2 = await ExtractTextFromDoc(file2);
+
+            var diff = new DiffPlex.Differ();
+            var inlineBuilder = new DiffPlex.DiffBuilder.SideBySideDiffBuilder(diff);
+            var model = inlineBuilder.BuildDiffModel(text1, text2);
+
+            var sbLeft = new StringBuilder();
+            var sbRight = new StringBuilder();
+            
+            foreach (var line in model.OldText.Lines)
+            {
+                if (line.Type == DiffPlex.DiffBuilder.Model.ChangeType.Inserted)
+                {
+                    sbLeft.AppendLine($"<span class=\"inserted\">{line.Text}</span>");
+                }
+                else if (line.Type == DiffPlex.DiffBuilder.Model.ChangeType.Deleted)
+                {
+                    sbLeft.AppendLine($"<span class=\"deleted\">{line.Text}</span>");
+                }
+                else
+                {
+                    sbLeft.AppendLine(line.Text);
+                }
+            }
+
+            foreach (var line in model.NewText.Lines)
+            {
+                if (line.Type == DiffPlex.DiffBuilder.Model.ChangeType.Inserted)
+                {
+                    sbRight.AppendLine($"<span class=\"inserted\">{line.Text}</span>");
+                }
+                else if (line.Type == DiffPlex.DiffBuilder.Model.ChangeType.Deleted)
+                {
+                    sbRight.AppendLine($"<span class=\"deleted\">{line.Text}</span>");
+                }
+                else
+                {
+                    sbRight.AppendLine(line.Text);
+                }
+            }
+
+            diffResultLeft = sbLeft.ToString();
+            diffResultRight = sbRight.ToString();
+        }
+    }
+
+    private async Task<string> ExtractTextFromDoc(IBrowserFile file)
+    {
+        using var stream = file.OpenReadStream();
+        using var memoryStream = new MemoryStream();
+        await stream.CopyToAsync(memoryStream);
+        using var wordDoc = WordprocessingDocument.Open(memoryStream, false);
+
+        var body = wordDoc.MainDocumentPart.Document.Body;
+        return body.InnerText;
+    }
+}

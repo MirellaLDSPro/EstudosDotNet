@@ -1,0 +1,27 @@
+.diff-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.diff-column {
+    width: 48%;
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #f9f9f9;
+}
+
+.diff-column pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.inserted {
+    background-color: #d4f7dc;
+    text-decoration: none; /* Remove o sublinhado padrão */
+}
+
+.deleted {
+    background-color: #f7d4d4;
+    text-decoration: line-through; /* Mantém o riscado */
+}
